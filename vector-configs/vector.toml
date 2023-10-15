@@ -28,6 +28,7 @@ inputs = ["log_json"]
 source = '''
 if is_json(.message) ?? false {
   .message = parse_json!(.message)
+  .level = .message.level
 }
 '''
 
