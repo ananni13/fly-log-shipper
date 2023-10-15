@@ -26,8 +26,10 @@ source = '''
 type = "remap"
 inputs = ["log_json"]
 source = '''
-parsed = parse_json!(.message)
-. = merge!(., parsed)
+if is_json(.message) ?? false {
+  parsed = parse_json!(.message)
+  . = merge!(., parsed)
+}
 '''
 
 [sinks.fly_log_metrics_prometheus]
