@@ -27,8 +27,7 @@ type = "remap"
 inputs = ["log_json"]
 source = '''
 if is_json(.message) ?? false {
-  parsed = parse_json!(.message)
-  . = merge!(., parsed)
+  .message = parse_json!(.message)
 }
 '''
 
