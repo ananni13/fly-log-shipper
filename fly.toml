@@ -2,9 +2,9 @@ app = "ananni-log-shipper"
 primary_region = "ams"
 
 [[services]]
-http_checks = []
-internal_port = 8686
+  http_checks = []
+  internal_port = 8686
 
 [env]
-ORG = "personal"
-QUEUE = "personal-org-logs"
+  ORG = "personal"
+  QUEUE = "personal-org-logs"
