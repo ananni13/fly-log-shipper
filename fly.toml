@@ -1,9 +1,9 @@
 app = "ananni-log-shipper"
 primary_region = "ams"
 
-[[services]]
-  http_checks = []
-  internal_port = 8686
+[metrics]
+  port = 9598
+  path = "/metrics"
 
 [env]
   ORG = "personal"
