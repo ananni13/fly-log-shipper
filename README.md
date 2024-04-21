@@ -27,6 +27,7 @@ However for advanced uses you can still configure a NATs client in your apps to 
 | `ACCESS_TOKEN` | Fly personal access token (required; set with `fly secrets set ACCESS_TOKEN=$(fly auth token)`)                  |
 | `SUBJECT`      | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                               |
 | `QUEUE`        | Arbitrary queue name if you want to run multiple log processes for HA and avoid duplicate messages being shipped |
+| `NETWORK`      | 6PN network, if you want to run log-shipper through a  WireGuard connection (defaults to `fdaa:0:0`)             |
 
 After generating your `fly.toml`, remember to update the internal port to match the `vector` internal port
 defined in `vector-configs/vector.toml`. Not doing so will result in health checks failing on deployment.
@@ -149,6 +150,14 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `NEW_RELIC_LICENSE_KEY` | (optional) New Relic License key |
 | `NEW_RELIC_REGION`      | (optional) eu or us (default us) |
 | `NEW_RELIC_ACCOUNT_ID`  | New Relic Account Id             |
+
+### OpsVerse
+
+| Secret                  | Description            |
+| ----------------------- | ---------------------- |
+| `OPSVERSE_LOGS_ENDPOINT`| OpsVerse Logs Endpoint |
+| `OPSVERSE_USERNAME`     | OpsVerse Username      |
+| `OPSVERSE_PASSWORD`     | OpsVerse Password      |
 
 ### Papertrail
 
