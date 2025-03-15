@@ -9,7 +9,7 @@ In this repo you will find various [Vector Sinks](https://vector.dev/docs/refere
 1. Create a new fly logger app based on our docker image
 
 ```
-fly launch --image flyio/log-shipper:latest
+fly launch --image flyio/log-shipper:latest --no-public-ips
 ```
 
 2. Set [NATS source secrets](#nats-source-configuration) for your new app
@@ -76,9 +76,10 @@ Set the secrets below associated with your desired log destination
 
 ### Better Stack Logs (formerly Logtail)
 
-| Secret                      | Description                    |
-|-----------------------------|--------------------------------|
-| `BETTER_STACK_SOURCE_TOKEN` | Better Stack Logs source token |
+| Secret                        | Description                                                               |
+|-------------------------------|---------------------------------------------------------------------------|
+| `BETTER_STACK_SOURCE_TOKEN`   | Better Stack Telemetry source token                                       |
+| `BETTER_STACK_INGESTING_HOST` | Better Stack source ingesting host (default is `in.logs.betterstack.com`) |
 
 ### Datadog
 
@@ -172,6 +173,14 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | ----------------- | --------------- |
 | `SEMATEXT_REGION` | Sematext region |
 | `SEMATEXT_TOKEN`  | Sematext token  |
+
+
+### Signoz
+
+| Secret                | Description                                                     |
+| --------------------- | --------------------------------------------------------------- |
+| `SIGNOZ_INGESTION_KEY`| Signoz Access Token                                             |
+| `SIGNOZ_URI`       | Signoz URI (default is 'https://ingest.us.signoz.cloud/logs/vector') |
 
 ### Uptrace
 
