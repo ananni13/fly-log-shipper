@@ -62,12 +62,13 @@ Set the secrets below associated with your desired log destination
 
 ### AWS CloudWatch
 
-| Secret                  | Description                                                                             |
-| ----------------------- | --------------------------------------------------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`     | AWS Access key with access to the log bucket                                            |
-| `AWS_SECRET_ACCESS_KEY` | AWS secret access key                                                                   |
-| `AWS_REGION`            | Region for CloudWatch                                                                   |
-| `CLOUDWATCH_LOG_GROUP_NAME`           | Log Group to send logs to in CloudWatch |
+| Secret                      | Description                                  |
+| --------------------------- | -------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`         | AWS Access key with access to the log bucket |
+| `AWS_SECRET_ACCESS_KEY`     | AWS secret access key                        |
+| `AWS_REGION`                | Region for CloudWatch                        |
+| `CLOUDWATCH_LOG_GROUP_NAME` | Log Group to send logs to in CloudWatch      |
+| `CLOUDWATCH_ENCODING_CODEC` | CloudWatch codec ( default is "json" )       |
 
 ### Axiom
 
