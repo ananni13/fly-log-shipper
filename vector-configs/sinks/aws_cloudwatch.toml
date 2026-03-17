@@ -9,4 +9,4 @@
   stream_name = "{{ fly.app.name }}/{{ host }}"
 
 [sinks.aws_cloudwatch.encoding]
-  encoding.codec = "${CLOUDWATCH_ENCODING_CODEC:-json}"
+  codec = "${CLOUDWATCH_ENCODING_CODEC:-json}"
