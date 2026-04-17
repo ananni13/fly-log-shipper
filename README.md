@@ -201,6 +201,8 @@ One of these is required for New Relic logs. New Relic recommend the license key
 
 See [SigNoz Docs](https://signoz.io/docs/ingestion/signoz-cloud/overview/) for region-specific Ingestion URLs and Keys.
 
+For **self-hosted SigNoz**, set `SIGNOZ_INGESTION_URL` to your own ingestion endpoint — see [Self-Hosted Ingestion](https://signoz.io/docs/ingestion/self-hosted/overview/). `SIGNOZ_INGESTION_KEY` is only required for SigNoz Cloud and can be left unset for self-hosted deployments.
+
 ### Uptrace
 
 | Secret                  | Description        |
