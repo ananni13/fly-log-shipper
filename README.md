@@ -21,13 +21,13 @@ However for advanced uses you can still configure a NATs client in your apps to 
 
 ## NATS source configuration
 
-| Secret         | Description                                                                                                      |
-| -------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `ORG`          | Organisation slug (default to `personal`)                                                                        |
-| `ACCESS_TOKEN` | Fly personal access token (required; set with `fly secrets set ACCESS_TOKEN=$(fly auth token)`)                  |
-| `SUBJECT`      | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                               |
-| `QUEUE`        | Arbitrary queue name if you want to run multiple log processes for HA and avoid duplicate messages being shipped |
-| `NETWORK`      | 6PN network, if you want to run log-shipper through a  WireGuard connection (defaults to `fdaa:0:0`)             |
+| Secret         | Description                                                                                                          |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------|
+| `ORG`          | Organisation slug (default to `personal`)                                                                            |
+| `ACCESS_TOKEN` | Fly personal access token (required; set with `fly secrets set ACCESS_TOKEN=$(fly tokens create readonly personal)`) |
+| `SUBJECT`      | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                                   |
+| `QUEUE`        | Arbitrary queue name if you want to run multiple log processes for HA and avoid duplicate messages being shipped     |
+| `NETWORK`      | 6PN network, if you want to run log-shipper through a  WireGuard connection (defaults to `fdaa:0:0`)                 |
 
 After generating your `fly.toml`, remember to update the internal port to match the `vector` internal port
 defined in `vector-configs/vector.toml`. Not doing so will result in health checks failing on deployment.
@@ -59,6 +59,16 @@ Set the secrets below associated with your desired log destination
 | `AWS_BUCKET`            | AWS S3 bucket to store logs in                                                          |
 | `AWS_REGION`            | Region for the bucket                                                                   |
 | `S3_ENDPOINT`           | (optional) Endpoint URL for S3 compatible object stores such as Cloudflare R2 or Wasabi |
+
+### AWS CloudWatch
+
+| Secret                      | Description                                  |
+| --------------------------- | -------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`         | AWS Access key with access to the log bucket |
+| `AWS_SECRET_ACCESS_KEY`     | AWS secret access key                        |
+| `AWS_REGION`                | Region for CloudWatch                        |
+| `CLOUDWATCH_LOG_GROUP_NAME` | Log Group to send logs to in CloudWatch      |
+| `CLOUDWATCH_ENCODING_CODEC` | CloudWatch codec ( default is "json" )       |
 
 ### Axiom
 
@@ -152,6 +162,14 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `NEW_RELIC_REGION`      | (optional) eu or us (default us) |
 | `NEW_RELIC_ACCOUNT_ID`  | New Relic Account Id             |
 
+### OpenObserve
+
+| Secret                 | Description          |
+| ---------------------- | -------------------- |
+| `OPENOBSERVE_URI`      | OpenObserve URI      |
+| `OPENOBSERVE_USER`     | OpenObserve user     |
+| `OPENOBSERVE_PASSWORD` | OpenObserve password |
+
 ### OpsVerse
 
 | Secret                  | Description            |
@@ -174,13 +192,16 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `SEMATEXT_REGION` | Sematext region |
 | `SEMATEXT_TOKEN`  | Sematext token  |
 
+### SigNoz
 
-### Signoz
+| Secret                 | Description                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| `SIGNOZ_INGESTION_KEY` | SigNoz Ingestion Key                                                           |
+| `SIGNOZ_INGESTION_URL` | SigNoz Ingestion URL (default is `https://ingest.us.signoz.cloud/logs/vector`) |
 
-| Secret                | Description                                                     |
-| --------------------- | --------------------------------------------------------------- |
-| `SIGNOZ_INGESTION_KEY`| Signoz Access Token                                             |
-| `SIGNOZ_URI`       | Signoz URI (default is 'https://ingest.us.signoz.cloud/logs/vector') |
+See [SigNoz Docs](https://signoz.io/docs/ingestion/signoz-cloud/overview/) for region-specific Ingestion URLs and Keys.
+
+For **self-hosted SigNoz**, set `SIGNOZ_INGESTION_URL` to your own ingestion endpoint — see [Self-Hosted Ingestion](https://signoz.io/docs/ingestion/self-hosted/overview/). `SIGNOZ_INGESTION_KEY` is only required for SigNoz Cloud and can be left unset for self-hosted deployments.
 
 ### Uptrace
 
@@ -236,7 +257,7 @@ Any fly app can connect to the NATs server on `nats://[fdaa::3]:4223` (IPV6).
 
 **Note: you will need to supply a user / password.**
 
-> **User**: is your Fly organisation slug, which you can obtain from `fly orgs list` > **Password**: is your fly token, which you can obtain from `fly auth token`
+> **User**: is your Fly organisation slug, which you can obtain from `fly orgs list` > **Password**: is your fly token, which you can obtain from `fly tokens create readonly personal`
 
 ### Example using the NATs client
 
